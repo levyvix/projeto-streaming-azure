@@ -20,6 +20,12 @@ Para a implementação deste projeto, utilizamos uma arquitetura baseada na plat
 
 - **Azure Data Lake Storage Gen2**: Os dados são armazenados no Azure Data Lake Storage Gen2. Este sistema de arquivos corporativo é otimizado para análises de big data, suportando uma variedade de cargas de trabalho, incluindo processamento com Hadoop, Spark e outras ferramentas. O Data Lake armazena um histórico completo dos dados de temperatura, o que é valioso para análises retrospectivas e tendências ao longo do tempo.
 
+
+![image](images/rg.png)
+
+![object](images/object.png)
+
+
 ## Conclusão
 
 
