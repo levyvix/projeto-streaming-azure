@@ -8,13 +8,6 @@ import random
 # Load environment variables
 dotenv.load_dotenv(dotenv.find_dotenv())
 
-# Generate event data
-event_data = [{
-    "CodCAM": "CM" + str(i).zfill(3),
-    "Temperatura": random.randint(-10, 5),
-    "Odometro": random.randint(0, 100),
-} for i in range(50)]
-
 # Get environment variables for event hub connection
 EVENT_HUB_CONNECTION_STR = os.getenv("EVENT_HUB_CONNECTION_STR")
 EVENT_HUB_NAME = os.getenv("EVENT_HUB_NAME")
@@ -35,12 +28,16 @@ async def run():
         event_data_batch = await producer.create_batch()
 
         # Add events to the batch.
-        for event in event_data:
-            event_data_batch.add(EventData(str(event)))
+        for i in range(50):
+            event_data_batch.add(EventData(str({
+                "CodCAM": "CM" + str(i).zfill(3),
+                "Temperatura": random.randint(-10, 5),
+                "Odometro": random.randint(0, 100),
+            })))
 
         # Send the batch of events to the event hub.
         await producer.send_batch(event_data_batch)
-        print(f"Sent a batch of {len(event_data)} events to the event hub.")
+        print(f"Sent a batch of 50 events to the event hub.")
 
 # Run the function
 asyncio.run(run())
